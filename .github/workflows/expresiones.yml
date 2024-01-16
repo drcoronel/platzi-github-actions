@@ -1,0 +1,47 @@
+name: Expresiones
+run-name: Aprendiendo sobre expresiones
+on: 
+    workflow_dispatch: 
+        inputs:
+            edad:
+                description: 'Edad'
+                required: true
+                type: integer
+            nombre:
+                description: 'Nombre'
+                required: true
+                default: 'Juan'
+                type: string
+            nacionalidad:
+                description: 'nacionalidad'
+                required: true
+                default: 'Colombia'
+                type: string
+
+jobs:
+    mayor:
+        if: ${{ inputs.edad >= 18 }}
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Correr script 
+              run: echo ${{ inputs.nombre }} es mayor de edad 
+    
+    menor: 
+        if: ${{ inputs.edad < 18 }}
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Correr script 
+              run: echo ${{ inputs.nombre }} es menor de edad
+
+    rechazo:
+        if: ${{ inputs.nacionalidad != 'Colombia'}}
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Correr script 
+              run: echo ${{ inputs.nombre }} no aplica para la beca
+    aceptado:
+        if: ${{ inputs.nacionalidad == 'Colombia'}}
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Correr script 
+              run: echo ${{ inputs.nombre }} aplica para la beca
