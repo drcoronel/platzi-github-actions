@@ -1,0 +1,18 @@
+name: Contexto
+run-name: Aprendiendo sobre contextos 
+
+on: [ workflow_dispatch ]
+env: 
+    name: Daniel
+    age: 29
+
+jobs:
+    print-env:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo Your name is ${{ env.name }}
+            - run: echo Your age is ${{ env.age }}
+    print-branch:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo Ran in branch ${{ github.ref }}
