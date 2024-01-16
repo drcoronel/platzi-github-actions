@@ -1,0 +1,52 @@
+name: triggers
+run-name: Aprendiendo nuevos triggers
+
+on:
+  push:
+    branches:
+      - 'aprendiendo-github-actions'
+  pull_request: 
+    types: [opened]
+    paths:
+      - '**.py'
+  workflow_dispatch:
+    inputs:
+      lenguaje:
+        description: 'Lenguaje favorito'
+        default: Python
+        required: true
+        type: choice
+        options:
+        - Python
+        - JavaScript
+        - Go
+      nombre:
+        description: 'Tu nombre'
+        required: true
+        default: Juan
+        type: string
+    
+    
+    
+jobs:
+  hello-manual:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v4 
+      - name: Define name
+        run: echo "USERNAME=${{ inputs.nombre }}" >> $GITHUB_ENV 
+      - name: Define language
+        run: echo "LANGUAGE=${{ inputs.lenguaje }}" >> $GITHUB_ENV 
+      - name: Run hello_manual.py 
+        run: python hello_manual.py
+  hello-world:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 
+      - name: Define envVars 
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV 
+      - name: Run hello.py 
+        run: python hello.py
