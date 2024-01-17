@@ -13,11 +13,12 @@ jobs:
             WORKFLOW_NAME: ${{ github.workflow }}
         steps:
             - name: Repo info 
-              run: echo "Repository name  $REPO_NAME in branch $BRANCH" 
+              run: echo "Repository name  ${{ env.REPO_NAME }} in branch ${{ env.BRANCH }}" 
             - name: workflow info 
-              run: echo "Running job $JOB_ID of $WORKFLOW_NAME in step $STEP_NAME"
+              run: echo "Running job ${{ env.JOB_ID }} of ${{ env.WORKFLOW_NAME }} in step ${{ env.STEP_NAME }}"
               env: 
                 STEP_NAME: workflowInfo
+
 
     
 
