@@ -1,0 +1,23 @@
+name: Varibles
+run-name: Aprendiendo sobre variables
+on: [ push ]
+env: 
+    REPO_NAME: ${{ github.repository }}
+    BRANCH: ${{ github.ref }}
+
+jobs:
+    workflow-vars:
+        runs-on: ubuntu-latest 
+        env: 
+            JOB_ID: 0 
+            WORKFLOW_NAME: ${{ github.workflow }}
+        steps:
+            - name: Repo info 
+              run: echo "Repository name  $REPO_NAME in branch $BRANCH" 
+            - name: workflow info 
+              run: echo "Running job $JOB_ID" of $WORKFLOW_NAME in step $STEP_NAME"
+              env: 
+                STEP_NAME: ${{ github.action}} 
+
+    
+
