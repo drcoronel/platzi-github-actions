@@ -17,7 +17,7 @@ jobs:
             - name: workflow info 
               run: echo "Running job $JOB_ID" of $WORKFLOW_NAME in step $STEP_NAME"
               env: 
-                STEP_NAME: ${{ github.action}} 
+                STEP_NAME: workflowInfo
 
     
 
